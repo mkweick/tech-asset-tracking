@@ -1,0 +1,33 @@
+<%= link_to image_tag("ks-logo.png", size: '40'), root_path, id: "logo" %>
+<div class="navbar-header">
+  <%= link_to "Employee Asset Manager", root_path, class: "navbar-brand ks-red-light ks-shadow" %>
+</div>
+<ul class="nav navbar-nav navbar-right">
+  <% if logged_in? %>
+    <li><%= link_to "My Assets", user_path(current_user), class: "ks-red-light" %></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle ks-red-light" data-toggle="dropdown" 
+                        role="button" aria-haspopup="true" aria-expanded="false">
+        Matt <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to edit_user_path(current_user), class: "ks-red" do %>
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <span class="user-dropdown-spacing">Edit profile</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to logout_path, method: 'post', class: "ks-red" do %>
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            <span class="user-dropdown-spacing">Log out</span>
+          <% end %>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li><%= link_to "Admin Features Here", '#', class: "ks-red" %></li>
+      </ul>
+    </li>
+  <% else %>
+    <%= link_to "Log in", login_path, class: "btn btn-sm navbar-btn ks-red-btn" %>
+  <% end %>
+</ul>

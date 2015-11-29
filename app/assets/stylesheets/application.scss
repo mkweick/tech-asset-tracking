@@ -1,0 +1,63 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$ks-red: #450000;
+$ks-red-light: #7c5050;
+$ks-red-light-btn: #702d2d;
+
+
+.ks-red {
+  color: $ks-red !important;
+}
+
+.ks-red-light {
+  color: $ks-red-light !important;
+}
+
+.ks-red-light:hover {
+  color: $ks-red !important;
+}
+
+.ks-red-btn {
+  background-color: $ks-red-light-btn;
+  color: #FFFFFF;
+}
+
+.ks-red-btn:hover {
+  background-color: $ks-red;
+  color: #FFFFFF;
+}
+
+.ks-shadow {
+  text-shadow: 1px 1px 1px #FFFFFF;
+  letter-spacing: 1px;
+}
+
+.navbar-brand{
+  padding-left: 0;
+}
+
+#logo {
+  position: absolute;
+  left: 50%;
+  margin: 5px 0 0 -26px;
+  text-decoration: none;
+}
+
+.user-dropdown-spacing {
+  margin-left: 5px;
+}
+
+.img-border-radius {
+  border-radius: 5px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

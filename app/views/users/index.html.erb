@@ -1,0 +1,7 @@
+<% @page_title = "Users" %>
+
+<% @users.each do |user| %>
+  <ul>
+    <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
+  </ul>
+<% end %>
