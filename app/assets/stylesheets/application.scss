@@ -33,9 +33,16 @@ $ks-red-light-btn: #702d2d;
   color: #FFFFFF;
 }
 
+.ks-red-btn:active:focus, .ks-red-btn:focus {
+  outline: none;
+  background-color: $ks-red-light-btn;
+  color: #FFFFFF;
+}
+
 .ks-shadow {
-  text-shadow: 1px 1px 1px #FFFFFF;
+  
   letter-spacing: 1px;
+  font-weight: bold;
 }
 
 .navbar-brand{
@@ -60,4 +67,39 @@ $ks-red-light-btn: #702d2d;
 img {
   max-width: 100%;
   height: auto;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.th-inactive-link {
+  color: grey;
+}
+
+.th-row-users {
+  background-color: #e7e7e7;
+}
+
+.th-row-users:hover {
+  background-color: #e7e7e7 !important;
+}
+
+.admin-cb {
+  vertical-align: middle;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+  background-color: $ks-red;
+  border-color: $ks-red;
+}
+
+.pagination > li > a, .pagination > li > span {
+  color: $ks-red;
 }

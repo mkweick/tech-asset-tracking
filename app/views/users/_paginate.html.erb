@@ -1,0 +1,58 @@
+<% small ||= false %>
+<% filter = params[:filter] if params[:filter] %>
+<% sort = params[:sort] if params[:sort] %>
+
+<% unless @pages <= 1 %>
+  <nav>
+    <ul class="pagination <%= "pagination-sm" if small %>">
+      <% if params[:page].nil? %>
+        <li class="disabled"><span>&laquo;</span></li>
+      <% elsif params[:page] == "2" %>
+        <li>
+          <%= link_to "&laquo;".html_safe, users_path(filter: filter, sort: sort) %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "&laquo;".html_safe, users_path(filter: filter,
+                                                      sort: sort,
+                                                      page: (params[:page].to_i - 1)) %>
+        </li>
+      <% end %>
+      
+      <% @pages.times do |n| %>
+        <% page = { page: (n + 1) } %>
+        <% if (n == 0 && params[:page].nil?) %>
+          <li class="active"><span>1</span></li>
+        <% elsif n == 0 %>
+          <li>
+            <%= link_to "1", users_path(filter: filter, sort: sort) %>
+          </li>
+        <% elsif (params[:page].to_i * User::PAGE_OFFSET) == ((n + 1) * User::PAGE_OFFSET) %>
+          <li class="active"><span><%= "#{n + 1}" %></span></li>
+        <% else %>
+          <li>
+            <%= link_to "#{n + 1}", users_path(filter: filter,
+                                               sort: sort,
+                                               page: (n + 1)) %>
+          </li>
+        <% end %>
+      <% end %>
+      
+      <% if params[:page].nil? %>
+        <li>
+          <%= link_to '&raquo;'.html_safe, users_path(filter: filter,
+                                                      sort: sort,
+                                                      page: 2) %>
+        </li>
+      <% elsif params[:page].to_i == @pages %>
+        <li class="disabled"><span>&raquo;</span></li>
+      <% else %>
+        <li>
+          <%= link_to "&raquo;".html_safe, users_path(filter: filter,
+                                                      sort: sort,
+                                                      page: (params[:page].to_i + 1)) %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>

@@ -1,0 +1,9 @@
+<% @page_title = "Categories" %>
+
+<ul>
+  <% @categories.each do |ctg| %>
+    <li style="list-style: none;">
+      <%= link_to ctg.name, category_path(ctg), class: "ks-red-light" %>
+    </li>
+  <% end %>
+</ul>

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :admin?
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -25,15 +25,29 @@ class ApplicationController < ActionController::Base
     session.delete(:user_id)
   end
   
+  def log_in_message
+    flash.alert = "Access Denied. Please log in."
+    redirect_to root_path
+  end
+  
+  def access_denied
+    flash.alert = "You do not have permissions to access that"
+    redirect_to user_path(current_user)
+  end
+  
+  def require_user
+    log_in_message unless logged_in?
+  end
+  
   def require_owner(obj)
-    unless obj && logged_in? && (current_user == obj.user || admin?)
-      logged_in? ? (redirect_to user_path(current_user)) : (redirect_to root_path)
+    if logged_in?
+      access_denied unless obj && (current_user == obj.user || admin?)
+    else
+      log_in_message
     end
   end
   
   def require_admin
-    unless logged_in? && admin?
-      logged_in? ? (redirect_to user_path(current_user)) : (redirect_to root_path)
-    end
+    logged_in? ? (access_denied unless admin?) : (log_in_message)
   end
 end

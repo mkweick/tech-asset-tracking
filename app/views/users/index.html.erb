@@ -1,7 +1,16 @@
 <% @page_title = "Users" %>
 
-<% @users.each do |user| %>
-  <ul>
-    <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
-  </ul>
-<% end %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="row text-center">
+      <%= render 'paginate', small: true %>
+    </div>
+    <table class="table table-hover">
+      <%= render 'th_row' %>
+      <%= render 'td_rows' %>
+    </table>
+    <div class="row text-center">
+      <%= render 'paginate' %>
+    </div>
+  </div>
+</div>
