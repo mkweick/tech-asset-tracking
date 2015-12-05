@@ -1,0 +1,29 @@
+<table class="table table-hover">
+  <tr class="th-row">
+    <th width="13%">
+      MFG Name
+    </th>
+    <th width="13%">
+      Model #
+    </th>
+    <th width="13%">
+      Serial #
+    </th>
+    <th width="44%">
+      Description
+    </th>
+    <th width="13%"></th>
+    <% @open_unfixed_assets.each do |asset| %>
+      <tr>
+        <td><%= asset.mfg_name %></td>
+        <td><%= asset.model_num %></td>
+        <td><%= asset.serial_num %></td>
+        <td><%= asset.description %></td>
+        <td class="table-row-data">
+          <%= link_to "Check Out", check_out_path(asset), method: :post,
+                                         class: "btn btn-sm ks-red-btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tr>
+</table>

@@ -74,7 +74,7 @@ end
   end
 end
 
-50.times do |n|
+75.times do |n|
   UnfixedAsset.create!  category_id: rand(1..12),
                         mfg_name: MFG.sample,
                         model_num: "Tester " + Faker::Number.number(3).to_s,
@@ -109,7 +109,7 @@ puts "Fixed General Assets created: #{FixedAsset.all.where("category_id > ?", 2)
 puts "Fixed General Assignments created: #{FixedAssignment.all
                                               .where("fixed_asset_id > ?", 100)
                                               .size}/75"
-puts "Unfixed Assets created: #{UnfixedAsset.all.size}/50"
+puts "Unfixed Assets created: #{UnfixedAsset.all.size}/75"
 puts "Unfixed Assignments created: #{UnfixedAssignment.all.size}/35"
 puts
 puts "-" * 60

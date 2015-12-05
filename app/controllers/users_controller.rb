@@ -38,7 +38,8 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     
     if @user.save
-      flash.notice = "#{@user.first_name} #{@user.last_name} created successfully"
+      flash.notice = "#{@user.first_name} #{@user.last_name} 
+                      created successfully"
       redirect_to users_path
     else
       render 'new'
@@ -87,7 +88,8 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       if @user.destroy
-        flash.notice = "#{@user.first_name} #{@user.last_name} successfully deleted"
+        flash.notice = "#{@user.first_name} #{@user.last_name} 
+                        successfully deleted"
       else
         flash.alert = "#{@user.first_name} #{@user.last_name} can't be deleted. 
                        Fixed or Unfixed assets still exist."

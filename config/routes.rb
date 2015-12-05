@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   
   resources :users
   resources :categories
-  resources :fixed_assets, except: [:index]
-  resources :unfixed_assets, except: [:index]
+  resources :fixed_assets
+  resources :unfixed_assets
   
   post '/check-out/:id', to: 'unfixed_assets#check_out', as: 'check_out'
   post '/check-in/:id', to: 'unfixed_assets#check_in', as: 'check_in'
