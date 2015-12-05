@@ -1,9 +1,24 @@
 <% @page_title = "Categories" %>
 
-<ul>
+<div class="col-xs-12 col-md-8 col-md-offset-2">
   <% @categories.each do |ctg| %>
-    <li style="list-style: none;">
-      <%= link_to ctg.name, category_path(ctg), class: "ks-red-light" %>
-    </li>
+    <div class="col-xs-4 col-md-4 text-center">
+      <%= link_to ctg.name, category_path(ctg),
+                  class: "btn btn-default btn-block ctg-btn ctg-name ks-red-btn" %>
+      
+      <% if admin? %>
+        <div class="pull-right ctg-corner">
+          <%= link_to edit_category_path(ctg) do %>
+            <span class="glyphicon glyphicon-info-sign ctg-edit"></span>
+          <% end %>
+          
+          <%= link_to category_path(ctg), method: "delete",
+                                          data: { confirm: "Are you sure you " + 
+                                          "want to DELETE #{ctg.name}" } do %>
+            <span class="glyphicon glyphicon-remove-circle ctg-edit"></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-</ul>
+</div>

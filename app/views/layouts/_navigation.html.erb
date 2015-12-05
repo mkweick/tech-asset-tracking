@@ -5,13 +5,13 @@
 </div>
 <ul class="nav navbar-nav navbar-right">
   <% if logged_in? %>
-    <li>
-      <%= link_to "My Assets", user_path(current_user), class: "ks-red-light bold" %>
-    </li>
-    
     <% if admin? %>
       <%= render 'layouts/admin_nav' %>
     <% end %>
+    
+    <li>
+      <%= link_to "My Assets", user_path(current_user), class: "ks-red-light bold" %>
+    </li>
     
     <%= render 'layouts/user_nav' %>
   <% else %>

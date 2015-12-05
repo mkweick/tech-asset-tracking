@@ -1,16 +1,22 @@
 <% @page_title = "Users" %>
 
+<%= render 'shared/title', title: "Manage Users" %>
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
+    
     <div class="row text-center">
       <%= render 'paginate', small: true %>
     </div>
+    
     <table class="table table-hover">
-      <%= render 'th_row' %>
-      <%= render 'td_rows' %>
+      <%= render 'index_table_header' %>
+      <%= render 'index_table' %>
     </table>
+    
     <div class="row text-center">
       <%= render 'paginate' %>
     </div>
+    
   </div>
 </div>

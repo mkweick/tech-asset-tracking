@@ -26,7 +26,7 @@ end
 
 100.times do |n|
   FixedAssignment.create! user_id: rand(1..90),
-                          fixed_asset_id: rand(1..100)
+                          fixed_asset_id: n
 end
 
 50.times do |n|
@@ -40,7 +40,7 @@ end
 
 20.times do |n|
   UnfixedAssignment.create! user_id: rand(1..90),
-                            unfixed_asset_id: rand(1..50)
+                            unfixed_asset_id: n
 end
 
 puts "-" * 40

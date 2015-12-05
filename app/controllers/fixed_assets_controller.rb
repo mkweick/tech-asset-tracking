@@ -1,0 +1,3 @@
+class FixedAssetsController < ApplicationController
+  
+end

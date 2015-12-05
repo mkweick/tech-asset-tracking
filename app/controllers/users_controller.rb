@@ -7,21 +7,19 @@ class UsersController < ApplicationController
   
   def index
     if @filter == :fixed_assets
-      @users = User.select("users.*,
-                            COUNT(fixed_assignments.user_id) fixed_assets_count")
-                   .joins("LEFT JOIN fixed_assignments ON 
-                                     users.id = fixed_assignments.user_id")
+      @users = User.select("users.*, COUNT(f_asn.user_id) f_assets_count")
+                   .joins("LEFT JOIN fixed_assignments AS f_asn
+                           ON users.id = f_asn.user_id")
                    .group("users.id")
-                   .order("fixed_assets_count #{@sort.to_s}")
+                   .order("f_assets_count #{@sort.to_s}")
                    .offset(@offset)
                    .limit(User::PAGE_OFFSET)
     elsif @filter == :unfixed_assets
-      @users = User.select("users.*,
-                            COUNT(unfixed_assignments.user_id) unfixed_assets_count")
-                   .joins("LEFT JOIN unfixed_assignments ON 
-                                     users.id = unfixed_assignments.user_id")
+      @users = User.select("users.*, COUNT(uf_asn.user_id) uf_assets_count")
+                   .joins("LEFT JOIN unfixed_assignments AS uf_asn 
+                           ON users.id = uf_asn.user_id")
                    .group("users.id")
-                   .order("unfixed_assets_count #{@sort.to_s}")
+                   .order("uf_assets_count #{@sort.to_s}")
                    .offset(@offset)
                    .limit(User::PAGE_OFFSET)
     else
@@ -47,7 +45,21 @@ class UsersController < ApplicationController
     end
   end
   
-  def show; end
+  def show
+    @fixed_assets = @user.fixed_assets
+                         .select("ctg.name, fixed_assets.id, mfg_name, 
+                                  model_num, serial_num")
+                         .joins("JOIN categories AS ctg 
+                                 ON fixed_assets.category_id = ctg.id")
+                         .order("ctg.name asc")
+    
+    @unfixed_assets = @user.unfixed_assets
+                           .select("ctg.name, unfixed_assets.id, mfg_name, 
+                                    model_num, serial_num")
+                           .joins("JOIN categories AS ctg 
+                                   ON unfixed_assets.category_id = ctg.id")
+                           .order("ctg.name asc")
+  end
   
   def edit; end
   
@@ -62,9 +74,26 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
-    flash.notice = "#{@user.first_name} #{@user.last_name} successfully deleted"
-    redirect_to users_path
+    if params[:asset_type]
+      if params[:asset_type] == 'fixed'
+        @user.fixed_assets.delete(params[:asset_id])
+        flash.notice = "Fixed asset successfully deleted from 
+                        #{@user.first_name} #{@user.last_name}"
+      else
+        @user.unfixed_assets.delete(params[:asset_id])
+        flash.notice = "Loaned asset successfully checked in for  
+                        #{@user.first_name} #{@user.last_name}"
+      end
+      redirect_to user_path(@user)
+    else
+      if @user.destroy
+        flash.notice = "#{@user.first_name} #{@user.last_name} successfully deleted"
+      else
+        flash.alert = "#{@user.first_name} #{@user.last_name} can't be deleted. 
+                       Fixed or Unfixed assets still exist."
+      end
+      redirect_to users_path
+    end
   end
   
   private
@@ -93,11 +122,17 @@ class UsersController < ApplicationController
       when "admin" then @filter = :admin
       else @filter = :last_name
     end
+    
     params[:sort] == "desc" ? (@sort = :desc) : (@sort = :asc)
   end
   
   def set_pages_offset
-    params[:page] ? (@offset = (params[:page].to_i - 1) * User::PAGE_OFFSET) : (@offset = 0)
+    if params[:page]
+      @offset = (params[:page].to_i - 1) * User::PAGE_OFFSET
+    else
+      @offset = 0
+    end
+    
     @pages = (User.all.size / User::PAGE_OFFSET.to_f).ceil
   end
 end

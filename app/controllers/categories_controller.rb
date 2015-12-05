@@ -1,12 +1,11 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:index, :destroy]
   before_action :require_user, only: [:index, :show]
   before_action :require_admin, except: [:index, :show]
   
   
-  def index
-    @categories = Category.all.order(name: :asc)
-  end
+  def index; end
   
   def new
     @category = Category.new
@@ -16,7 +15,7 @@ class CategoriesController < ApplicationController
     @category = Category.create(category_params)
     
     if @category.save
-      flash.notice = "Category '#{@category.name}' created successfully"
+      flash.notice = "#{@category.name} category created successfully"
       redirect_to categories_path
     else
       render 'new'
@@ -24,14 +23,18 @@ class CategoriesController < ApplicationController
   end
   
   def show
-    redirect_to categories_path if @category.nil?  
+    redirect_to categories_path if @category.nil?
+    
+    @open_unfixed_assets = @category.unfixed_assets
+                                    .where('id NOT IN (SELECT unfixed_asset_id 
+                                            FROM unfixed_assignments)')
   end
   
   def edit; end
   
   def update
     if @category.update(category_params)
-      flash.notice = "Category '#{@category.name}' updated successfully"
+      flash.notice = "#{@category.name} category updated successfully"
       redirect_to categories_path
     else
       @category.reload
@@ -40,15 +43,13 @@ class CategoriesController < ApplicationController
   end
   
   def destroy
-    if @category.assets.any?
-      flash.alert = "Category '#{@category.name}' not deleted. There is " + 
-                    "#{@category.assets.size} assets associated with it. " + 
-                    "Remove these associations and try again."
-      redirect_to categories_path
+    if @category.destroy
+      flash.notice = "#{@category.name} category deleted successfully"
     else
-      @category.destroy
-      flash.notice = " Category '#{@category.name}' deleted successfully"
+      flash.alert = "#{@category.name} can't be deleted. Fixed or Unfixed 
+                     assets still exist."
     end
+    redirect_to categories_path
   end
   
   private
@@ -59,6 +60,10 @@ class CategoriesController < ApplicationController
   
   def set_category
     @category = Category.where('lower(name) = ?', params[:id].gsub('-', ' '))
-                                                                      .first
+                                                             .first
+  end
+  
+  def set_categories
+    @categories = Category.all.order(name: :asc)
   end
 end

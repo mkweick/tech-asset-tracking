@@ -1,0 +1,36 @@
+<table class= "table table-hover">
+  <tr class="th-row">
+    <th width="20%">Category</th>
+    <th width="20%">MFG Name</th>
+    <th width="20%">Model #</th>
+    <th width="20%">Serial #</th>
+    <% if @user == current_user %>
+      <th width="10%"></th>
+    <% end %>
+    <% if admin? && current_user != @user %>
+      <th width="10%"></th>
+    <% end %>
+  </tr>
+  <% @unfixed_assets.each do |asset| %>    
+    <tr>
+      <td style="font-weight: bold"><%= asset.name %></td>
+      <td><%= asset.mfg_name %></td>
+      <td><%= asset.model_num %></td>
+      <td><%= asset.serial_num %></td>
+      <% if @user == current_user %>
+        <td class="table-row-data">
+          <%= link_to "Check In", check_in_path(asset), method: :post,
+                                      class: "btn btn-sm ks-red-btn" %>
+        </td>
+      <% end %>
+      <% if admin? && current_user != @user %>
+        <td class="table-row-data">
+          <%= link_to "Check In", user_path(@user, asset_type: "unfixed",
+                                                   asset_id: asset.id),
+                                  method: :delete,
+                                  class: "btn btn-sm ks-red-btn" %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table><br/>

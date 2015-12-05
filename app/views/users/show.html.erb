@@ -1,5 +1,47 @@
 <% @page_title = "#{@user.first_name} #{@user.last_name}" %>
 
+<%= render 'shared/title', title: "#{@user.first_name} #{@user.last_name}" %>
+
 <div class= "row">
-    <%= @user.username %>
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="text-center user-asset-headings">
+      Fixed Assets (<%= @fixed_assets.size %>)
+    </div><br/>
+    <% if @fixed_assets.any? %>
+    
+      <%= render 'show_fa_table' %>
+    
+    <% else %>
+      <div class="text-center">
+        You have no fixed assets assigned to your profile. If you feel this is
+        a mistake,<br/><a href="mailto:it@example.com">please contact your 
+        system administrator.</a>
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr/><br/>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="text-center user-asset-headings">
+      Loaned Assets (<%= @unfixed_assets.size %>)
+    </div><br/>
+    <% if @unfixed_assets.any? %>
+      
+      <%= render 'show_ufa_table' %>
+      
+    <% else %>
+      <div class="text-center">
+        You have no loaned assets checked out at this time.
+        <br/><br/><br/>
+      </div>
+    <% end %>
+    
+    <% if current_user == @user %>
+      <div class="text-center">
+        <%= link_to "Check Out Equipment", categories_path,
+                                         class: "btn btn-default ks-red-btn" %>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -10,6 +10,8 @@
       
       <div class="text-center">
         <%= f.submit ctg_btn(@category), class: "btn btn-default ks-red-btn" %>
+        <%= link_to "Cancel", categories_path,
+                              class: "btn btn-default btn-red-light" %>
       </div>
     <% end %>
   </div>

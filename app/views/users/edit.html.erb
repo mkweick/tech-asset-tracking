@@ -1,5 +1,8 @@
 <% @page_title = "#{@user.first_name} #{@user.last_name} - Edit Profile" %>
 
+<%= render 'shared/title',
+            title: "#{@user.first_name} #{@user.last_name} - Edit Profile" %>
+
 <%= render "shared/errors", obj: @user %>
 
 <%= render "user_form", only_password_fields: true %>

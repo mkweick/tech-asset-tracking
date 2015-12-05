@@ -40,7 +40,6 @@ $ks-red-light-btn: #702d2d;
 }
 
 .ks-shadow {
-  
   letter-spacing: 1px;
   font-weight: bold;
 }
@@ -77,12 +76,13 @@ a {
   color: grey;
 }
 
-.th-row-users {
-  background-color: #e7e7e7;
+.th-row, .th-row:hover {
+  background-color: #e7e7e7 !important;
 }
 
-.th-row-users:hover {
-  background-color: #e7e7e7 !important;
+.table-row-data {
+  vertical-align: middle !important;
+  text-align: center;
 }
 
 .admin-cb {
@@ -102,4 +102,33 @@ a {
 
 .pagination > li > a, .pagination > li > span {
   color: $ks-red;
+}
+
+.ctg-name {
+  font-size: 20px;
+}
+
+.ctg-btn {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.ctg-corner {
+  margin-top: -125px;
+  margin-right: 6px;
+}
+
+.ctg-edit {
+  color: #cccccc;
+  font-size: 13px;
+}
+
+.ctg-edit:hover, .ctg-edit:focus {
+  color: white;
+}
+
+.user-asset-headings {
+  font-size: 20px;
+  font-weight: bold;
 }

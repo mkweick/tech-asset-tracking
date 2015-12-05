@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  PAGE_OFFSET = 25
+  PAGE_OFFSET = 50
   
-  has_many :fixed_assignments
+  has_many :fixed_assignments, dependent: :restrict_with_error
   has_many :fixed_assets, through: :fixed_assignments
-  has_many :unfixed_assignments
+  has_many :unfixed_assignments, dependent: :restrict_with_error
   has_many :unfixed_assets, through: :unfixed_assignments
   
   validates :username,  presence: true, uniqueness: { case_sensitive: false },
