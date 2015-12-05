@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201041850) do
+ActiveRecord::Schema.define(version: 20151201041555) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -43,17 +43,6 @@ ActiveRecord::Schema.define(version: 20151201041850) do
 
   add_index "fixed_assignments", ["fixed_asset_id"], name: "index_fixed_assignments_on_fixed_asset_id"
   add_index "fixed_assignments", ["user_id"], name: "index_fixed_assignments_on_user_id"
-
-  create_table "unfixed_asset_statuses", force: :cascade do |t|
-    t.integer  "unfixed_asset_id"
-    t.datetime "checked_out"
-    t.datetime "checked_in"
-    t.datetime "return_date"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "unfixed_asset_statuses", ["unfixed_asset_id"], name: "index_unfixed_asset_statuses_on_unfixed_asset_id"
 
   create_table "unfixed_assets", force: :cascade do |t|
     t.integer  "category_id"
