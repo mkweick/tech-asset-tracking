@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   resources :fixed_assets, except: [:show]
   resources :unfixed_assets, except: [:show]
   
-  get '/asset-management', to: 'static_pages#asset_admin', as: 'asset_management'
+  get '/asset_management', to: 'static_pages#asset_admin', as: 'asset_management'
   post '/assign/:id', to: 'fixed_assets#assign', as: 'assign'
   post '/unassign/:id', to: 'fixed_assets#unassign', as: 'unassign'
-  post '/check-out/:id', to: 'unfixed_assets#check_out', as: 'check_out'
-  post '/check-in/:id', to: 'unfixed_assets#check_in', as: 'check_in'
+  post '/check_out/:id', to: 'unfixed_assets#check_out', as: 'check_out'
+  post '/check_in/:id', to: 'unfixed_assets#check_in', as: 'check_in'
 end
