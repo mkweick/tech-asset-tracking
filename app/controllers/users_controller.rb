@@ -106,6 +106,7 @@ class UsersController < ApplicationController
   
   def set_filter_sort
     case params[:filter]
+      when 'fn' then @filter = 'first_name'
       when 'fa' then @filter = 'fa_count'
       when 'ufa' then @filter = 'ufa_count'
       when 'admin' then @filter = 'admin'

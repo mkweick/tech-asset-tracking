@@ -6,7 +6,7 @@
       
     <% elsif @filter == "last_name" && @sort == "asc" %>
     
-      <%= link_to users_path(filter: 'ln', sort: 'd'), class: "ks-red-light" do %>
+      <%= link_to users_path(filter: "ln", sort: "d"), class: "ks-red-light" do %>
         Last Name
         <span class="glyphicon glyphicon-sort-by-attributes"></span>
       <% end %>
@@ -21,7 +21,27 @@
     <% end %>
   </th>
   
-  <th width="20%"><span class="th-inactive-link">First Name</span></th>
+  <th width="20%">
+    <% if @filter != "first_name" %>
+    
+      <%= link_to "First Name", users_path(filter: "fn"), class: "ks-red-light" %>
+      
+    <% elsif @filter == "first_name" && @sort == "asc" %>
+    
+      <%= link_to users_path(filter: "fn", sort: "d"), class: "ks-red-light" do %>
+        First Name
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to users_path(filter: "fn"), class: "ks-red-light" do %>
+        First Name
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
   
   <th width="18%" style="text-align: center">
     <% if @filter != "fa_count" %>
