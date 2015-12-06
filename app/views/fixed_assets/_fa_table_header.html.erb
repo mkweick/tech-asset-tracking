@@ -1,0 +1,148 @@
+<tr class="th-row">
+  <th width="15%">
+    <% if @filter != "ctg_name" %>
+    
+      <%= link_to "Category", fixed_assets_path, class: "ks-red-light" %>
+      
+    <% elsif @filter == "ctg_name" && @sort == "asc" %>
+    
+      <%= link_to fixed_assets_path(filter: 'ctg', sort: 'd'),
+                                    class: "ks-red-light" do %>
+        Category
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to fixed_assets_path, class: "ks-red-light" do %>
+        Category
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
+  
+  <th width="15%">
+    <% if @filter != "mfg_name" %>
+    
+      <%= link_to "Mfg Name", fixed_assets_path(filter: "mfg"),
+                                        class: "ks-red-light" %>
+                                             
+    <% elsif @filter == "mfg_name" && @sort == "asc" %>
+    
+      <%= link_to fixed_assets_path(filter: "mfg", sort: "d"),
+                                    class: "ks-red-light" do %>
+        Mfg Name
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to fixed_assets_path(filter: "mfg"), class: "ks-red-light" do %>
+        Mfg Name
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
+  
+  <th width="15%">
+    <% if @filter != "model_num" %>
+    
+      <%= link_to "Model #", fixed_assets_path(filter: "mn"),
+                                        class: "ks-red-light" %>
+                                             
+    <% elsif @filter == "model_num" && @sort == "asc" %>
+    
+      <%= link_to fixed_assets_path(filter: "mn", sort: "d"),
+                                    class: "ks-red-light" do %>
+        Model #
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to fixed_assets_path(filter: "mn"), class: "ks-red-light" do %>
+        Model #
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
+  
+  <th width="17%">
+    <% if @filter != "serial_num" %>
+    
+      <%= link_to "Serial #", fixed_assets_path(filter: "sn"),
+                                        class: "ks-red-light" %>
+                                             
+    <% elsif @filter == "serial_num" && @sort == "asc" %>
+    
+      <%= link_to fixed_assets_path(filter: "sn", sort: "d"),
+                                    class: "ks-red-light" do %>
+        Serial #
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to fixed_assets_path(filter: "sn"), class: "ks-red-light" do %>
+        Serial #
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
+  
+  <th width="17%">
+    <% if @filter != "purchase_date" %>
+    
+      <%= link_to "Purchase Date", fixed_assets_path(filter: "pd", sort: "d"),
+                                                      class: "ks-red-light" %>
+                                             
+    <% elsif @filter == "purchase_date" && @sort == "desc" %>
+    
+      <%= link_to fixed_assets_path(filter: "pd"), class: "ks-red-light" do %>
+        Purchase Date
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to fixed_assets_path(filter: "pd", sort: "d"),
+                                    class: "ks-red-light" do %>
+        Purchase Date
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
+  
+  <th width="25%">
+    <% if @filter != "assigned" %>
+    
+      <%= link_to "Assigned To", fixed_assets_path(filter: "asn"),
+                                        class: "ks-red-light" %>
+                                             
+    <% elsif @filter == "assigned" && @sort == "asc" %>
+    
+      <%= link_to fixed_assets_path(filter: "asn", sort: "d"),
+                                    class: "ks-red-light" do %>
+        Assigned To
+        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+      <% end %>
+      
+    <% else %>
+    
+      <%= link_to fixed_assets_path(filter: "asn"), class: "ks-red-light" do %>
+        Assigned To
+        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+      <% end %>
+      
+    <% end %>
+  </th>
+  
+  <th width="13%" style="text-align: center">
+    <span class="th-inactive-link">Manage</span>
+  </th>
+</tr>

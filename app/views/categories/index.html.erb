@@ -8,7 +8,7 @@
   <% @categories.each do |ctg| %>
     <div class="col-xs-4 col-md-4 text-center">
       <%= link_to ctg.name, category_path(ctg),
-              class: "btn btn-default btn-block ctg-btn ctg-name ks-red-btn" %>
+              class: "btn btn-default btn-block ctg-btn ks-red-btn" %>
       
       <% if admin? %>
         <div class="pull-right ctg-corner">

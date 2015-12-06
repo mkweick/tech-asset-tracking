@@ -16,12 +16,10 @@
       <td><%= asset.serial_num %></td>
       <% if admin? %>
         <td class="table-row-data">
-          <%= link_to user_path(@user, asset_type: "fixed",
-                                       asset_id: asset.id),
-                                       method: :delete do %>
-            <span class="glyphicon glyphicon-remove-circle ks-red-light">
-            </span>
-          <% end %>
+          <%= link_to "Unassign", user_path(@user, asset_type: "fixed",
+                                            asset_id: asset.id),
+                                            method: :delete,
+                                            class: "btn btn-sm ks-red-btn" %>
         </td>
       <% end %>
     </tr>

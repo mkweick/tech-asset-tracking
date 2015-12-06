@@ -21,8 +21,9 @@
         <div class="form-group">
           <%= f.label :username, class: "col-xs-3 col-md-3 control-label" %>
           <div class="col-xs-9 col-md-9"> 
-            <%= f.text_field :username, placeholder: "Min 4 characters",
-                                                  class: "form-control" %>
+            <%= f.text_field :username, autofocus: 'autofocus',
+                                        placeholder: "Min 4 characters",
+                                        class: "form-control" %>
           </div>
         </div>
         
@@ -51,8 +52,9 @@
       <div class="form-group">
         <%= f.label :password, class: "col-xs-3 col-md-3 control-label" %>
         <div class="col-xs-9 col-md-9">  
-          <%= f.password_field :password, placeholder: "Min 6 characters",
-                                                    class: "form-control"%>
+          <%= f.password_field :password, autofocus: 'autofocus',
+                                          placeholder: "Min 6 characters",
+                                          class: "form-control"%>
         </div>
       </div>
       

@@ -1,0 +1,22 @@
+<% @page_title = "Manage Unfixed Assets" %>
+
+<%= render 'shared/title', title: "Manage Unfixed Assets" %>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    
+    <div class="row text-center">
+      <%= render 'paginate', small: true %>
+    </div>
+    
+    <table class="table table-hover">
+      <%= render 'ufa_table_header' %>
+      <%= render 'ufa_table' %>
+    </table>
+    
+    <div class="row text-center">
+      <%= render 'paginate' %>
+    </div>
+    
+  </div>
+</div>

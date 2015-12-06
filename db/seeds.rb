@@ -23,8 +23,8 @@ Category.create!([{ name: "Desktops"}, { name: "Laptops"}, { name: "Keyboards"},
                         mfg_name: "HP",
                         model_num: "Compaq 8300",
                         serial_num: "SMPROHPDV#{n}",
-                        description: "500GB HDD, 8GB RAM, Win 7 Pro, Slim Line, 
-                                      Professional Grade",
+                        description: "500GB HDD, 8GB RAM, Win 7 Pro, Slim " + 
+                                      "Line, Professional Grade",
                         purchase_date: Time.now
     
     FixedAssignment.create! user_id: n,
@@ -38,8 +38,8 @@ end
                         mfg_name: "Dell",
                         model_num: "Latitude 5000",
                         serial_num: "DVPROSMP#{n}",
-                        description: "15.4\" glossy screen, 500GB SSD Drive, 
-                                      8GB RAM, Win 7 Pro, 8 lbs, .75\" thick",
+                        description: "15.4\" glossy screen, 500GB SSD Drive, " + 
+                                      "8GB RAM, Win 7 Pro, 8 lbs, .75\" thick",
                         purchase_date: Time.now
     
     FixedAssignment.create! user_id: n,

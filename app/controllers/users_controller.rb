@@ -6,28 +6,15 @@ class UsersController < ApplicationController
   before_action :set_pages_offset, only: [:index]
   
   def index
-    if @filter == :fixed_assets
-      @users = User.select("users.*, COUNT(f_asn.user_id) f_assets_count")
-                   .joins("LEFT JOIN fixed_assignments AS f_asn
-                           ON users.id = f_asn.user_id")
-                   .group("users.id")
-                   .order("f_assets_count #{@sort.to_s}")
-                   .offset(@offset)
-                   .limit(User::PAGE_OFFSET)
-    elsif @filter == :unfixed_assets
-      @users = User.select("users.*, COUNT(uf_asn.user_id) uf_assets_count")
-                   .joins("LEFT JOIN unfixed_assignments AS uf_asn 
-                           ON users.id = uf_asn.user_id")
-                   .group("users.id")
-                   .order("uf_assets_count #{@sort.to_s}")
-                   .offset(@offset)
-                   .limit(User::PAGE_OFFSET)
-    else
-      @users = User.all
-                   .order(@filter => @sort)
-                   .offset(@offset)
-                   .limit(User::PAGE_OFFSET)
-    end
+    @users = User.select("id, username, last_name, first_name, admin,  
+                          (SELECT COUNT(*) FROM fixed_assignments AS fa 
+                              WHERE users.id = fa.user_id) AS fa_count, 
+                          (SELECT COUNT(*) FROM unfixed_assignments AS ufa 
+                              WHERE users.id = ufa.user_id) AS ufa_count")
+                 .group(:id)
+                 .order("#{@filter} #{@sort}")
+                 .offset(@offset)
+                 .limit(User::PAGE_OFFSET)
   end
   
   def new
@@ -78,7 +65,7 @@ class UsersController < ApplicationController
     if params[:asset_type]
       if params[:asset_type] == 'fixed'
         @user.fixed_assets.delete(params[:asset_id])
-        flash.notice = "Fixed asset successfully deleted from 
+        flash.notice = "Fixed asset successfully unassigned from 
                         #{@user.first_name} #{@user.last_name}"
       else
         @user.unfixed_assets.delete(params[:asset_id])
@@ -119,13 +106,13 @@ class UsersController < ApplicationController
   
   def set_filter_sort
     case params[:filter]
-      when "fixed-assets" then @filter = :fixed_assets
-      when "unfixed-assets" then @filter = :unfixed_assets
-      when "admin" then @filter = :admin
-      else @filter = :last_name
+      when 'fa' then @filter = 'fa_count'
+      when 'ufa' then @filter = 'ufa_count'
+      when 'admin' then @filter = 'admin'
+      else @filter = 'last_name'
     end
     
-    params[:sort] == "desc" ? (@sort = :desc) : (@sort = :asc)
+    params[:sort] == 'd' ? (@sort = 'desc') : (@sort = 'asc')
   end
   
   def set_pages_offset
@@ -135,6 +122,6 @@ class UsersController < ApplicationController
       @offset = 0
     end
     
-    @pages = (User.all.size / User::PAGE_OFFSET.to_f).ceil
+    @pages = (User.count / User::PAGE_OFFSET.to_f).ceil
   end
 end

@@ -1,0 +1,22 @@
+<% @page_title = "Manage Fixed Assets" %>
+
+<%= render 'shared/title', title: "Manage Fixed Assets" %>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    
+    <div class="row text-center">
+      <%= render 'paginate', small: true %>
+    </div>
+    
+    <table class="table table-hover">
+      <%= render 'fa_table_header' %>
+      <%= render 'fa_table' %>
+    </table>
+    
+    <div class="row text-center">
+      <%= render 'paginate' %>
+    </div>
+    
+  </div>
+</div>

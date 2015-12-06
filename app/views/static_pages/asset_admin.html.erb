@@ -1,0 +1,43 @@
+<% @page_title = "Asset Management" %>
+
+<%= render 'shared/title', title: "Asset Management" %>
+<br/>
+<div class="row">
+  <div class="col-xs-6 col-md-3 col-md-offset-2">
+    <div class="text-center asset-headings">
+      Fixed Assets<hr/>
+    </div>
+    <div class="col-xs-12 col-md-12 text-center">
+      <%= link_to new_fixed_asset_path,
+                  class: "btn btn-default btn-block asset-btn ks-red-btn" do %>
+        <span class="glyphicon glyphicon-plus asset-btn-glyph"></span>
+        New
+      <% end %>
+      
+      <%= link_to fixed_assets_path,
+                  class: "btn btn-default btn-block asset-btn ks-red-btn" do %>
+        <span class="glyphicon glyphicon-pencil asset-btn-glyph"></span>
+        Manage
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="col-xs-6 col-md-3 col-md-offset-2">
+    <div class="text-center asset-headings">
+      Unfixed Assets<hr/>
+    </div>
+    <div class="col-xs-12 col-md-12 text-center">
+      <%= link_to new_unfixed_asset_path,
+                  class: "btn btn-default btn-block asset-btn ks-red-btn" do %>
+        <span class="glyphicon glyphicon-plus asset-btn-glyph"></span>
+        New
+      <% end %>
+      
+      <%= link_to unfixed_assets_path,
+                  class: "btn btn-default btn-block asset-btn ks-red-btn" do %>
+        <span class="glyphicon glyphicon-pencil asset-btn-glyph"></span>
+        Manage
+      <% end %>
+    </div>
+  </div>
+</div>

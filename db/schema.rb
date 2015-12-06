@@ -27,12 +27,13 @@ ActiveRecord::Schema.define(version: 20151201041555) do
     t.string   "model_num"
     t.string   "serial_num"
     t.text     "description"
-    t.datetime "purchase_date"
+    t.date     "purchase_date"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   add_index "fixed_assets", ["category_id"], name: "index_fixed_assets_on_category_id"
+  add_index "fixed_assets", ["serial_num"], name: "index_fixed_assets_on_serial_num"
 
   create_table "fixed_assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -50,12 +51,13 @@ ActiveRecord::Schema.define(version: 20151201041555) do
     t.string   "model_num"
     t.string   "serial_num"
     t.text     "description"
-    t.datetime "purchase_date"
+    t.date     "purchase_date"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   add_index "unfixed_assets", ["category_id"], name: "index_unfixed_assets_on_category_id"
+  add_index "unfixed_assets", ["serial_num"], name: "index_unfixed_assets_on_serial_num"
 
   create_table "unfixed_assignments", force: :cascade do |t|
     t.integer  "user_id"

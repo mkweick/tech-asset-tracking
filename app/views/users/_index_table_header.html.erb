@@ -1,77 +1,97 @@
 <tr class="th-row">
   <th width="24%">
-    <% if @filter != :last_name %>
+    <% if @filter != "last_name" %>
+    
       <%= link_to "Last Name", users_path, class: "ks-red-light" %>
-    <% elsif @filter == :last_name && @sort == :asc %>
-      <%= link_to users_path(filter: "last_name", sort: "desc"),
-                                              class: "ks-red-light" do %>
+      
+    <% elsif @filter == "last_name" && @sort == "asc" %>
+    
+      <%= link_to users_path(filter: 'ln', sort: 'd'), class: "ks-red-light" do %>
         Last Name
         <span class="glyphicon glyphicon-sort-by-attributes"></span>
       <% end %>
+      
     <% else %>
+    
       <%= link_to users_path, class: "ks-red-light" do %>
         Last Name
         <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
       <% end %>
+      
     <% end %>
   </th>
+  
   <th width="20%"><span class="th-inactive-link">First Name</span></th>
+  
   <th width="18%" style="text-align: center">
-    <% if @filter != :fixed_assets %>
-      <%= link_to "Fixed Assets", users_path(filter: "fixed-assets",
-                                              sort: "desc"),
-                                              class: "ks-red-light" %>
-    <% elsif @filter == :fixed_assets && @sort == :desc %>
-      <%= link_to users_path(filter: "fixed-assets", sort: "asc"),
-                                              class: "ks-red-light" do %>
+    <% if @filter != "fa_count" %>
+    
+      <%= link_to "Fixed Assets", users_path(filter: "fa", sort: "d"),
+                                             class: "ks-red-light" %>
+                                             
+    <% elsif @filter == "fa_count" && @sort == "desc" %>
+    
+      <%= link_to users_path(filter: "fa"), class: "ks-red-light" do %>
         Fixed Assets
         <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
       <% end %>
+      
     <% else %>
-      <%= link_to users_path(filter: "fixed-assets", sort: "desc"),
-                                              class: "ks-red-light" do %>
+    
+      <%= link_to users_path(filter: "fa", sort: "d"), class: "ks-red-light" do %>
         Fixed Assets
         <span class="glyphicon glyphicon-sort-by-attributes"></span>
       <% end %>
+      
     <% end %>
   </th>
+  
   <th width="20%" style="text-align: center">
-    <% if @filter != :unfixed_assets %>
-      <%= link_to "Loaned Assets", users_path(filter: "unfixed-assets",
-                                              sort: "desc"),
+    <% if @filter != "ufa_count" %>
+    
+      <%= link_to "Loaned Assets", users_path(filter: "ufa", sort: "d"),
                                               class: "ks-red-light" %>
-    <% elsif @filter == :unfixed_assets && @sort == :desc %>
-      <%= link_to users_path(filter: "unfixed-assets", sort: "asc"),
-                                              class: "ks-red-light" do %>
+                                              
+    <% elsif @filter == "ufa_count" && @sort == "desc" %>
+    
+      <%= link_to users_path(filter: "ufa"), class: "ks-red-light" do %>
         Loaned Assets
         <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
       <% end %>
+      
     <% else %>
-      <%= link_to users_path(filter: "unfixed-assets", sort: "desc"),
-                                              class: "ks-red-light" do %>
+    
+      <%= link_to users_path(filter: "ufa", sort: "d"), class: "ks-red-light" do %>
         Loaned Assets
         <span class="glyphicon glyphicon-sort-by-attributes"></span>
       <% end %>
+      
     <% end %>
   </th>
+  
   <th width="13%" style="text-align: center">
-    <% if @filter != :admin %>
-      <%= link_to "Admin", users_path(filter: "admin", sort: "desc"),
-                                              class: "ks-red-light" %>
-    <% elsif @filter == :admin && @sort == :desc %>
-      <%= link_to users_path(filter: "admin", sort: "asc"),
-                                              class: "ks-red-light" do %>
+    <% if @filter != "admin" %>
+    
+      <%= link_to "Admin", users_path(filter: "admin", sort: "d"),
+                                      class: "ks-red-light" %>
+                                              
+    <% elsif @filter == "admin" && @sort == "desc" %>
+    
+      <%= link_to users_path(filter: "admin"), class: "ks-red-light" do %>
         Admin
         <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
       <% end %>
+      
     <% else %>
-      <%= link_to users_path(filter: "admin", sort: "desc"),
-                                              class: "ks-red-light" do %>
+    
+      <%= link_to users_path(filter: "admin", sort: "d"), class: "ks-red-light" do %>
         Admin
         <span class="glyphicon glyphicon-sort-by-attributes"></span>
       <% end %>
+      
     <% end %>
   </th>
+  
   <th width="13%" style="text-align: center">
     <span class="th-inactive-link">Manage</span>
   </th>
