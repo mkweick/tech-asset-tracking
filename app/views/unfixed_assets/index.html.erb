@@ -1,6 +1,10 @@
 <% @page_title = "Manage Unfixed Assets" %>
 
-<%= render 'shared/title', title: "Manage Unfixed Assets" %>
+<%= render 'shared/title', title: link_to("Asset Management", 
+                                          asset_management_path,
+                                          class: "ks-red-light") + 
+                                          " &raquo; ".html_safe + 
+                                          "Unfixed Assets" %>
 
 <div class="row">
   <div class="col-xs-12 col-md-12">

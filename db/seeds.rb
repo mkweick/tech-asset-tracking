@@ -2,8 +2,8 @@ MFG = ["HP", "Dell", "Toshiba", "Panasonic", "Apple", "LG", "Samsung"]
 DATES = ["2015-12-05", "2015-10-16", "2015-04-28", "2014-11-02", "2014-06-30", 
          "2015-02-21", "2015-01-26", "2014-08-11", "2013-12-20", "2015-07-08"]
 
-User.create!  username: "mweick", first_name: "Matt", last_name: "Weick",
-              email: "mkweick@gmail.com", password: "weick18", admin: true
+User.create!  username: "admin", first_name: "Admin", last_name: "Admin",
+              email: "admin@example.com", password: "admin!", admin: true
 
 139.times do |n|
   User.create!  username: "example#{n + 1}",
