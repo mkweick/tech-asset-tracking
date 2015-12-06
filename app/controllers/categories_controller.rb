@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:index, :destroy]
   before_action :require_user, only: [:index, :show]
+  before_action :set_user, only: [:index, :show]
   before_action :require_admin, except: [:index, :show]
   
   
@@ -25,9 +26,15 @@ class CategoriesController < ApplicationController
   def show
     redirect_to categories_path if @category.nil?
     
-    @open_unfixed_assets = @category.unfixed_assets
-                                    .where('id NOT IN (SELECT unfixed_asset_id 
-                                            FROM unfixed_assignments)')
+    if @user
+      @open_fas = @category.fixed_assets
+                           .where('id NOT IN (SELECT fixed_asset_id 
+                                   FROM fixed_assignments)')
+    else
+      @open_ufas = @category.unfixed_assets
+                            .where('id NOT IN (SELECT unfixed_asset_id 
+                                    FROM unfixed_assignments)')
+    end
   end
   
   def edit; end
@@ -64,6 +71,16 @@ class CategoriesController < ApplicationController
   end
   
   def set_categories
-    @categories = Category.all.order(name: :asc)
+    @categories = Category.order(name: :asc)
+  end
+  
+  def set_user
+    if params[:user]
+      if admin?
+        @user = User.where('lower(username) = ?', params[:user].downcase).first
+      else
+        access_denied
+      end
+    end
   end
 end

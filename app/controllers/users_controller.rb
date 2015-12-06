@@ -34,19 +34,15 @@ class UsersController < ApplicationController
   end
   
   def show
-    @fixed_assets = @user.fixed_assets
-                         .select("ctg.name, fixed_assets.id, mfg_name, 
-                                  model_num, serial_num")
-                         .joins("JOIN categories AS ctg 
-                                 ON fixed_assets.category_id = ctg.id")
-                         .order("ctg.name asc")
+    @fas = @user.fixed_assets
+                .select("ctg.name, fixed_assets.id, mfg_name, model_num, serial_num")
+                .joins("JOIN categories AS ctg ON fixed_assets.category_id = ctg.id")
+                .order("ctg.name asc")
     
-    @unfixed_assets = @user.unfixed_assets
-                           .select("ctg.name, unfixed_assets.id, mfg_name, 
-                                    model_num, serial_num")
-                           .joins("JOIN categories AS ctg 
-                                   ON unfixed_assets.category_id = ctg.id")
-                           .order("ctg.name asc")
+    @ufas = @user.unfixed_assets
+                 .select("ctg.name, unfixed_assets.id, mfg_name, model_num, serial_num")
+                 .joins("JOIN categories AS ctg ON unfixed_assets.category_id = ctg.id")
+                 .order("ctg.name asc")
   end
   
   def edit; end
@@ -62,27 +58,15 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    if params[:asset_type]
-      if params[:asset_type] == 'fixed'
-        @user.fixed_assets.delete(params[:asset_id])
-        flash.notice = "Fixed asset successfully unassigned from 
-                        #{@user.first_name} #{@user.last_name}"
-      else
-        @user.unfixed_assets.delete(params[:asset_id])
-        flash.notice = "Loaned asset successfully checked in for  
-                        #{@user.first_name} #{@user.last_name}"
-      end
-      redirect_to user_path(@user)
+    if @user.destroy
+      flash.notice = "#{@user.first_name} #{@user.last_name} 
+                      successfully deleted"
     else
-      if @user.destroy
-        flash.notice = "#{@user.first_name} #{@user.last_name} 
-                        successfully deleted"
-      else
-        flash.alert = "#{@user.first_name} #{@user.last_name} can't be deleted. 
-                       Fixed or Unfixed assets still exist."
-      end
-      redirect_to users_path
+      flash.alert = "#{@user.first_name} #{@user.last_name} can't be deleted. 
+                     Fixed or Unfixed assets still exist."
     end
+  
+    redirect_to users_path
   end
   
   private

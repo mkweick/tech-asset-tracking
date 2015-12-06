@@ -6,22 +6,27 @@
     <th width="13%">
       Model #
     </th>
-    <th width="22%">
+    <th width="15%">
       Serial #
     </th>
-    <th width="40%">
+    <th width="33%">
       Description
     </th>
+    <th width="15%">
+      Purchase Date
+    </th>
     <th width="13%"></th>
-    <% @open_unfixed_assets.each do |asset| %>
+    <% @open_fas.order(mfg_name: :asc).each do |asset| %>
       <tr>
         <td><%= asset.mfg_name %></td>
         <td><%= asset.model_num %></td>
         <td><%= asset.serial_num %></td>
         <td><%= asset.description %></td>
+        <td><%= asset.purchase_date %></td>
         <td class="table-row-data">
-          <%= link_to "Check Out", check_out_path(asset), method: :post,
-                                         class: "btn btn-sm ks-red-btn" %>
+          <%= link_to "Assign to #{@user.first_name[0]}. #{@user.last_name}", 
+                                  assign_path(asset, user: @user.username),
+                                  method: :post, class: "btn btn-sm ks-red-btn" %>
         </td>
       </tr>
     <% end %>

@@ -1,13 +1,17 @@
 <% @page_title = "Categories" %>
+<% username = @user.username if @user %>
 
-<% if admin? %>
-  <%= render 'shared/title', title: "Manage Categories" %>
+<% if admin? && params[:user] %>
+  <%= render 'shared/title', title: "Assign Fixed Assets to #{@user.first_name} 
+                                    #{@user.last_name} - Categories" %>
+<% else %>
+  <%= render 'shared/title', title: "Categories" %>
 <% end %>
 
 <div class="col-xs-12 col-md-8 col-md-offset-2">
   <% @categories.each do |ctg| %>
     <div class="col-xs-4 col-md-4 text-center">
-      <%= link_to ctg.name, category_path(ctg),
+      <%= link_to ctg.name, category_path(ctg, user: username),
               class: "btn btn-default btn-block ctg-btn ks-red-btn" %>
       
       <% if admin? %>

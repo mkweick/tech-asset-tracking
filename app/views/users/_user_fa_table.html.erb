@@ -8,7 +8,7 @@
       <th width="10%"></th>
     <% end %>
   </tr>
-  <% @fixed_assets.each do |asset| %>
+  <% @fas.each do |asset| %>
     <tr>
       <td style="font-weight: bold"><%= asset.name %></td>
       <td><%= asset.mfg_name %></td>
@@ -16,10 +16,9 @@
       <td><%= asset.serial_num %></td>
       <% if admin? %>
         <td class="table-row-data">
-          <%= link_to "Unassign", user_path(@user, asset_type: "fixed",
-                                            asset_id: asset.id),
-                                            method: :delete,
-                                            class: "btn btn-sm ks-red-btn" %>
+          <%= link_to "Unassign", unassign_path(asset, user: @user.username),
+                                              method: :post,
+                                              class: "btn btn-sm ks-red-btn" %>
         </td>
       <% end %>
     </tr>

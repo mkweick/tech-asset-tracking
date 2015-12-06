@@ -7,6 +7,7 @@ class UnfixedAssetsController < ApplicationController
   before_action only: [:check_in] { require_owner(@uf_asn) }
   before_action :set_filter_sort, only: [:index]
   before_action :set_pages_offset, only: [:index]
+  before_action :set_user, only: [:check_in]
   
   def index
     @ufas = UnfixedAsset.select("ctg.name AS ctg_name, mfg_name, model_num, 
@@ -64,9 +65,16 @@ class UnfixedAssetsController < ApplicationController
   end
   
   def check_in
-    current_user.unfixed_assets.delete(@ufa)
-    flash.notice = "Loaned asset sucessfully checked in"
-    redirect_to user_path(current_user)
+    if @user && admin?
+      @user.unfixed_assets.delete(@ufa)
+      flash.notice = "Loaned asset sucessfully checked in for 
+                      #{@user.first_name} #{@user.last_name}"
+      redirect_to user_path(@user)
+    else
+      current_user.unfixed_assets.delete(@ufa)
+      flash.notice = "Loaned asset sucessfully checked in"
+      redirect_to user_path(current_user)
+    end
   end
   
   def check_out
@@ -116,5 +124,11 @@ class UnfixedAssetsController < ApplicationController
     end
     
     @pages = (UnfixedAsset.count / UnfixedAsset::PAGE_OFFSET.to_f).ceil
+  end
+  
+  def set_user
+    if params[:user]
+      @user = User.where('lower(username) = ?', params[:user].downcase).first
+    end
   end
 end

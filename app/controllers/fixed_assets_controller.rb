@@ -1,9 +1,10 @@
 class FixedAssetsController < ApplicationController
   before_action :require_admin
-  before_action :set_fa, only: [:edit, :update, :destroy]
+  before_action :set_fa, only: [:edit, :update, :destroy, :assign, :unassign]
   before_action :set_fa_user, only: [:destroy]
   before_action :set_filter_sort, only: [:index]
   before_action :set_pages_offset, only: [:index]
+  before_action :set_user, only: [:assign, :unassign]
   
   def index
     @fas = FixedAsset.select("ctg.name AS ctg_name, mfg_name, model_num, serial_num, 
@@ -60,6 +61,20 @@ class FixedAssetsController < ApplicationController
     redirect_to fixed_assets_path
   end
   
+  def assign
+    @user.fixed_assets << FixedAsset.find(@fa)
+    flash.notice = "Fixed asset successfully assigned to 
+                    #{@user.first_name} #{@user.last_name}"
+    redirect_to user_path(@user)
+  end
+  
+  def unassign
+    @user.fixed_assets.delete(@fa)
+    flash.notice = "Fixed asset successfully unassigned from 
+                    #{@user.first_name} #{@user.last_name}"
+    redirect_to user_path(@user)
+  end
+  
   private
   
   def fa_params
@@ -68,8 +83,7 @@ class FixedAssetsController < ApplicationController
   end
   
   def set_fa
-    @fa = FixedAsset.where('lower(serial_num) = ?', params[:id].downcase)
-                                                                    .first
+    @fa = FixedAsset.where('lower(serial_num) = ?', params[:id].downcase).first
   end
   
   def set_fa_user
@@ -97,5 +111,9 @@ class FixedAssetsController < ApplicationController
     end
     
     @pages = (FixedAsset.count / FixedAsset::PAGE_OFFSET.to_f).ceil
+  end
+  
+  def set_user
+    @user = User.where('lower(username) = ?', params[:user].downcase).first
   end
 end

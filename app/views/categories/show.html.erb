@@ -6,21 +6,36 @@
                                   @category.name %>
 
 <div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <% if @open_unfixed_assets.any? %>  
+  <% if @user %>
+    <div class="col-xs-12 col-md-12">
+      <% if @open_fas.any? %>  
+        <%= render 'show_fa_table' %>
+      <% else %>
       
-      <%= render 'show_table' %>
+        <div class="text-center">
+          All fixed <%= @category.name %> are currently assigned to other employees.
+          <br/>
+          <strong>Please consolidate assets or purchase more inventory!</strong>
+        </div>
+        
+      <% end %>
+    </div>
+  <% else %>
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <% if @open_ufas.any? %> 
+        <%= render 'show_ufa_table' %>
+      <% else %>
+    
+        <div class="text-center">
+          All loaned <%= @category.name %> are currently checked out by other employees.
+          <br/>
+          For info on availability, 
+          <a href="mailto:it@example.com">
+            please contact your system administrator.
+          </a>
+        </div>
       
-    <% else %>
-      <div class="text-center">
-        All loaned <%= @category.name.chop %> assets are 
-        currently checked out by other employees.
-        <br/>
-        For info on availability, 
-        <a href="mailto:it@example.com">
-          please contact your system administrator.
-        </a>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
