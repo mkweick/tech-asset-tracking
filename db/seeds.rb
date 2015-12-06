@@ -1,4 +1,6 @@
 MFG = ["HP", "Dell", "Toshiba", "Panasonic", "Apple", "LG", "Samsung"]
+DATES = ["2015-12-05", "2015-10-16", "2015-04-28", "2014-11-02", "2014-06-30", 
+         "2015-02-21", "2015-01-26", "2014-08-11", "2013-12-20", "2015-07-08"]
 
 User.create!  username: "mweick", first_name: "Matt", last_name: "Weick",
               email: "mkweick@gmail.com", password: "weick18", admin: true
@@ -25,7 +27,7 @@ Category.create!([{ name: "Desktops"}, { name: "Laptops"}, { name: "Keyboards"},
                         serial_num: "SMPROHPDV#{n}",
                         description: "500GB HDD, 8GB RAM, Win 7 Pro, Slim " + 
                                       "Line, Professional Grade",
-                        purchase_date: Time.now
+                        purchase_date: DATES.sample
     
     FixedAssignment.create! user_id: n,
                             fixed_asset_id: n
@@ -40,7 +42,7 @@ end
                         serial_num: "DVPROSMP#{n}",
                         description: "15.4\" glossy screen, 500GB SSD Drive, " + 
                                       "8GB RAM, Win 7 Pro, 8 lbs, .75\" thick",
-                        purchase_date: Time.now
+                        purchase_date: DATES.sample
     
     FixedAssignment.create! user_id: n,
                             fixed_asset_id: n
@@ -54,7 +56,7 @@ end
                         model_num: "Tester " + Faker::Number.number(3).to_s,
                         serial_num: Faker::Number.number(10),
                         description: "This is a generic test asset description",
-                        purchase_date: Time.now
+                        purchase_date: DATES.sample
   end
 end
 
@@ -64,7 +66,7 @@ end
                       model_num: "Tester " + Faker::Number.number(3).to_s,
                       serial_num: Faker::Number.number(10),
                       description: "This is a generic test asset description",
-                      purchase_date: Time.now
+                      purchase_date: DATES.sample
 end
 
 176.times do |n|
@@ -80,7 +82,7 @@ end
                         model_num: "Tester " + Faker::Number.number(3).to_s,
                         serial_num: Faker::Number.number(10),
                         description: "This is a generic test asset description",
-                        purchase_date: Time.now
+                        purchase_date: DATES.sample
 end
 
 35.times do |n|
