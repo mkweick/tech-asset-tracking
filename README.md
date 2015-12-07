@@ -1,6 +1,6 @@
 # Technology Asset Tracking System
 
-Asset tracking system for company's to let employee's checkout and cheeck-in
+Asset tracking system for companyies to let employees checkout and check-in
 loaned out company equipment.
 
 Allows IT departments to monitor and maintain assets while leaving the checkout
